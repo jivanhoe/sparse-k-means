@@ -115,12 +115,12 @@ end
 function sparse_kmeans(
     X::Array{Float64,2},
     K::Int64,
-    p::Int64,
-    num_restarts_per_solution::Int64 = 10,
-    num_restarts_per_cut::Int64 = 10
+    p::Int64;
+    num_restarts_per_solve::Int64 = 10,
+    num_restarts_per_cut::Int64 = 1
 )::Tuple{Array{Int64, 1}, Array{Int64, 1}}
     w_opt, z_opt, max_obj_value = solve_outer_problem(X, K, p, num_restarts_per_cut)
-    for seed=1:num_restarts_per_solution-1
+    for seed=1:num_restarts_per_solve-1
         w_new, z_new, new_obj_value = solve_outer_problem(X, K, p, num_restarts_per_cut, seed=seed)
         if new_obj_value > max_obj_value
             w_opt, z_opt, max_obj_value = w_new, z_new, new_obj_value
