@@ -116,7 +116,7 @@ function sparse_kmeans(
     X::Array{Float64,2},
     K::Int64,
     p::Int64;
-    num_restarts_per_solve::Int64 = 10,
+    num_restarts_per_solve::Int64 = 5,
     num_restarts_per_cut::Int64 = 1
 )::Tuple{Array{Int64, 1}, Array{Int64, 1}}
     w_opt, z_opt, max_obj_value = solve_outer_problem(X, K, p, num_restarts_per_cut)
